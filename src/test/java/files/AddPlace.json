@@ -1,0 +1,16 @@
+{
+  "location": {
+    "lat": 12.9356582,
+    "lng": 80.1431601
+  },
+  "accuracy": 50,
+  "name": "Chitlapakkam",
+  "phone_number": "(+91) 9578312323",
+  "address": "9/5 Gandhi Street",
+  "types": [
+    "home",
+    "shop"
+  ],
+  "website": "http://google.com",
+  "language": "English-IN"
+}
