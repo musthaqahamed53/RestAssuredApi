@@ -47,7 +47,6 @@ public class OauthEg {
         String title1 = gc.getCourses().getWebAutomation().get(1).getCourseTitle();
 
         System.out.println(title1);
-
     }
 
 }
