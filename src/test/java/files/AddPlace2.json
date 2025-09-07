@@ -1,0 +1,144 @@
+[{
+  "place": {
+    "name": "Chitlapakkam",
+    "location": {
+      "coordinates": {
+        "lat": 12.9356582,
+        "lng": 80.1431601
+      },
+      "accuracy": 50
+    },
+    "contact": {
+      "phone": {
+        "countryCode": "+91",
+        "number": "9578312323"
+      },
+      "email": "contact@chitlapakkam.org",
+      "website": "http://google.com"
+    },
+    "addresses": [
+      {
+        "type": "home",
+        "doorNo": "9/5",
+        "street": "Gandhi Street",
+        "area": "Chitlapakkam",
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "pincode": "600064"
+      },
+      {
+        "type": "office",
+        "doorNo": "12/1",
+        "street": "Anna Salai",
+        "area": "Guindy",
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "pincode": "600032"
+      },
+      {
+        "type": "warehouse",
+        "doorNo": "24B",
+        "street": "Outer Ring Road",
+        "area": "Perungalathur",
+        "city": "Chennai",
+        "state": "Tamil Nadu",
+        "pincode": "600063"
+      }
+    ],
+    "languages_supported": ["English-IN", "Tamil", "Hindi"],
+    "facilities": [
+      {
+        "name": "Grocery Store",
+        "type": "shop",
+        "openHours": {
+          "weekdays": "8AM - 9PM",
+          "weekends": "9AM - 10PM"
+        }
+      },
+      {
+        "name": "Playground",
+        "type": "recreation",
+        "openHours": {
+          "daily": "6AM - 8PM"
+        }
+      }
+    ]
+  },
+  "meta": {
+    "timestamp": "2025-07-18T18:45:00Z",
+    "verified": true,
+    "source": "Community"
+  }
+},
+  {
+    "place": {
+      "name": "Chitlapakkam",
+      "location": {
+        "coordinates": {
+          "lat": 12.9356582,
+          "lng": 80.1431601
+        },
+        "accuracy": 50
+      },
+      "contact": {
+        "phone": {
+          "countryCode": "+91",
+          "number": "9578312323"
+        },
+        "email": "contact@chitlapakkam.org",
+        "website": "http://google.com"
+      },
+      "addresses": [
+        {
+          "type": "home",
+          "doorNo": "9/5",
+          "street": "Gandhi Street",
+          "area": "Chitlapakkam",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "pincode": "600064"
+        },
+        {
+          "type": "office",
+          "doorNo": "12/1",
+          "street": "Anna Salai",
+          "area": "Guindy",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "pincode": "600032"
+        },
+        {
+          "type": "warehouse",
+          "doorNo": "24B",
+          "street": "Outer Ring Road",
+          "area": "Perungalathur",
+          "city": "Chennai",
+          "state": "Tamil Nadu",
+          "pincode": "600063"
+        }
+      ],
+      "languages_supported": ["English-IN", "Tamil", "Hindi"],
+      "facilities": [
+        {
+          "name": "Grocery Store",
+          "type": "shop",
+          "openHours": {
+            "weekdays": "8AM - 9PM",
+            "weekends": "9AM - 10PM"
+          }
+        },
+        {
+          "name": "Playground",
+          "type": "recreation",
+          "openHours": {
+            "daily": "6AM - 8PM"
+          }
+        }
+      ]
+    },
+    "meta": {
+      "timestamp": "2025-07-18T18:45:00Z",
+      "verified": true,
+      "source": "Community"
+    }
+  }]

@@ -1,0 +1,148 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "place": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "location": {
+            "type": "object",
+            "properties": {
+              "coordinates": {
+                "type": "object",
+                "properties": {
+                  "lat": {
+                    "type": "number",
+                    "minimum": -90,
+                    "maximum": 90
+                  },
+                  "lng": {
+                    "type": "number",
+                    "minimum": -180,
+                    "maximum": 180
+                  }
+                },
+                "required": ["lat", "lng"]
+              },
+              "accuracy": {
+                "type": "number",
+                "minimum": 0
+              }
+            },
+            "required": ["coordinates", "accuracy"]
+          },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "phone": {
+                "type": "object",
+                "properties": {
+                  "countryCode": {
+                    "type": "string",
+                    "pattern": "^\\+[1-9]\\d{0,3}$"
+                  },
+                  "number": {
+                    "type": "string",
+                    "pattern": "^[0-9]{10}$"
+                  }
+                },
+                "required": ["countryCode", "number"]
+              },
+              "email": {
+                "type": "string",
+                "format": "email"
+              },
+              "website": {
+                "type": "string",
+                "format": "uri"
+              }
+            },
+            "required": ["phone", "email"]
+          },
+          "addresses": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["home", "office", "warehouse", "other"]
+                },
+                "doorNo": {
+                  "type": "string"
+                },
+                "street": {
+                  "type": "string"
+                },
+                "area": {
+                  "type": "string"
+                },
+                "city": {
+                  "type": "string"
+                },
+                "state": {
+                  "type": "string"
+                },
+                "pincode": {
+                  "type": "string",
+                  "pattern": "^[0-9]{6}$"
+                }
+              },
+              "required": ["type", "doorNo", "street", "area", "city", "state", "pincode"]
+            }
+          },
+          "languages_supported": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "facilities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "openHours": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": ["name", "type"]
+            }
+          }
+        },
+        "required": ["name", "location", "contact", "addresses"]
+      },
+      "meta": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "verified": {
+            "type": "boolean"
+          },
+          "source": {
+            "type": "string"
+          }
+        },
+        "required": ["timestamp", "verified", "source"]
+      }
+    },
+    "required": ["place", "meta"]
+  }
+}

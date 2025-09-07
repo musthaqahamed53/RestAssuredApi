@@ -1,0 +1,20 @@
+{
+  "id": 101,
+  "name": "John Doe",
+  "email": "john.doe@university.edu",
+  "age": 22,
+  "isActive": true,
+  "gpa": 3.85,
+  "address": {
+    "street": "123 Main Street",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001"
+  },
+  "courses": ["Mathematics", "Computer Science", "Physics"],
+  "metadata": {
+    "enrollmentDate": "2021-09-01",
+    "graduationYear": 2025,
+    "scholarship": true
+  }
+}

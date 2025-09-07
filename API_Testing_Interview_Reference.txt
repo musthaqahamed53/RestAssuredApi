@@ -1,0 +1,232 @@
+===============================
+API TESTING INTERVIEW REFERENCE
+===============================
+
+1. JSONPATH VALIDATION
+======================
+
+Basic Field Extraction:
+js.get("[0].place.name")
+js.get("[0].place.location.coordinates.lat")
+js.get("[0].place.contact.email")
+
+Array Operations:
+js.getList("[0].place.addresses").size()
+js.getList("[0].place.addresses.type")
+
+Data Types:
+String placeName = js.get("[0].place.name");
+Float latitude = js.get("[0].place.location.coordinates.lat");  // Note: Float not Double
+Integer count = js.getList("[0].place.addresses").size();
+Boolean verified = js.get("[0].meta.verified");
+
+Common Patterns:
+- Array indexing: [0], [1]
+- Nested access: place.location.coordinates.lat
+- Collect arrays: addresses.type
+
+2. JSON SCHEMA VALIDATION
+=========================
+
+Setup:
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+Usage:
+InputStream schemaStream = getClass().getClassLoader().getResourceAsStream("schema.json");
+assertThat(jsonString, matchesJsonSchema(schemaStream));
+
+Alternative:
+assertThat(jsonString, matchesJsonSchemaInClasspath("schema.json"));
+
+Schema Structure:
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "name": {"type": "string"},
+    "age": {"type": "integer", "minimum": 0, "maximum": 120},
+    "email": {"type": "string", "format": "email"}
+  },
+  "required": ["name", "email"]
+}
+
+3. POJO SERIALIZATION/DESERIALIZATION
+====================================
+
+Deserialization (JSON → POJO):
+ObjectMapper mapper = new ObjectMapper();
+Student student = mapper.readValue(jsonString, Student.class);
+
+Array to List:
+Student[] studentsArray = mapper.readValue(jsonString, Student[].class);
+List<Student> students = Arrays.asList(studentsArray);
+
+Serialization (POJO → JSON):
+String jsonString = mapper.writeValueAsString(student);
+String jsonArray = mapper.writeValueAsString(studentsArray);
+
+Pretty Print JSON:
+String prettyJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(student);
+
+POJO Class Structure:
+public class Student {
+    private String name;
+    private int age;
+    private boolean isActive;  // Use getIsActive()/setIsActive() for JSON field "isActive"
+    
+    // Static nested classes for nested objects
+    public static class Address {
+        private String city;
+        private String state;
+        // getters/setters
+    }
+}
+
+4. REST ASSURED BASICS
+======================
+
+Basic Request:
+given()
+    .baseUri("https://api.example.com")
+    .header("Content-Type", "application/json")
+    .body(jsonPayload)
+.when()
+    .post("/endpoint")
+.then()
+    .statusCode(200)
+    .body("field", equalTo("expectedValue"));
+
+Response Extraction:
+String response = given().when().get("/api").then().extract().asString();
+MyPojo pojo = given().when().get("/api").then().extract().as(MyPojo.class);
+
+Path Parameters:
+given().pathParam("id", 123).when().get("/users/{id}")
+
+Query Parameters:
+given().queryParam("key", "value").when().get("/search")
+
+5. JSONPATH vs POJO vs SCHEMA
+=============================
+
+JsonPath:
+✅ Quick field access
+✅ Dynamic path building
+✅ No class creation needed
+❌ No type safety
+❌ Runtime errors only
+
+POJO:
+✅ Type safety
+✅ IDE support
+✅ Object-oriented operations
+❌ Requires class creation
+❌ No data validation
+
+Schema:
+✅ Data quality validation
+✅ Business rule enforcement
+✅ Detailed error messages
+❌ Doesn't create objects
+❌ Additional validation step
+
+Best Practice: Use all three - Schema for validation, POJO for complex operations, JsonPath for quick checks.
+
+6. COMMON INTERVIEW QUESTIONS
+=============================
+
+Q: JsonPath vs POJO?
+A: JsonPath for quick validations, POJO for type safety and complex logic. Use both based on needs.
+
+Q: How to handle boolean fields in POJO?
+A: For JSON field "isActive", use getIsActive()/setIsActive() methods.
+
+Q: Array vs List for JSON deserialization?
+A: Always prefer List<T> over arrays for better API and collection framework integration.
+
+Q: Static vs non-static nested classes in POJO?
+A: Always use static for JSON POJOs - no hidden reference to outer class, better performance.
+
+Q: When do you need ObjectMapper?
+A: For JSON ↔ POJO conversion. Not needed for POJO manipulation or when using REST Assured .as() method.
+
+Q: POJO vs Schema validation?
+A: POJO ensures structure mapping, Schema ensures data quality. Use both for robust validation.
+
+7. CODE SNIPPETS
+================
+
+Complete JsonPath Validation:
+JsonPath js = new JsonPath(jsonString);
+String name = js.get("name");
+Float price = js.get("price");
+List<String> categories = js.getList("categories");
+String firstCategory = js.get("categories[0]");
+
+Schema Validation with Error Handling:
+try {
+    assertThat(jsonData, matchesJsonSchema(schemaStream));
+    System.out.println("Validation passed");
+} catch (AssertionError e) {
+    System.out.println("Schema violation: " + e.getMessage());
+}
+
+POJO Modification:
+Student student = mapper.readValue(json, Student.class);
+student.setName("Updated Name");
+student.getAddress().setCity("New City");
+String modifiedJson = mapper.writeValueAsString(student);
+
+REST Assured with Schema:
+given()
+    .when().get("/api/users")
+    .then()
+        .statusCode(200)
+        .body(matchesJsonSchema(schemaStream))
+        .body("users[0].name", equalTo("John"));
+
+8. DEPENDENCIES
+===============
+
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>rest-assured</artifactId>
+    <version>5.5.5</version>
+</dependency>
+
+<dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>json-schema-validator</artifactId>
+    <version>5.5.5</version>
+</dependency>
+
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.19.1</version>
+</dependency>
+
+9. IMPORT STATEMENTS
+===================
+
+import io.restassured.path.json.JsonPath;
+import io.restassured.module.jsv.JsonSchemaValidator;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import static io.restassured.RestAssured.given;
+import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchema;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
+
+10. TROUBLESHOOTING
+==================
+
+ClassCastException Float/Double: Use Float for JsonPath decimal numbers
+UnrecognizedPropertyException: Check field names match JSON exactly or use @JsonProperty
+Static context error: Use ClassName.class instead of getClass() in static methods
+Schema validation fails: Check required fields, data types, and value constraints
+JsonPath returns null: Verify path syntax, array indexing, and field existence
+
+===============================
+END OF REFERENCE
+===============================

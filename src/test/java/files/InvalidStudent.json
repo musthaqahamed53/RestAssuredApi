@@ -1,0 +1,20 @@
+{
+  "id": 101,
+  "name": "",
+  "email": "invalid-email-format",
+  "age": -25,
+  "isActive": true,
+  "gpa": 15.5,
+  "address": {
+    "street": "",
+    "city": "",
+    "state": "INVALID_STATE_CODE_TOO_LONG",
+    "zipCode": "invalid"
+  },
+  "courses": [],
+  "metadata": {
+    "enrollmentDate": "invalid-date-format",
+    "graduationYear": 1800,
+    "scholarship": true
+  }
+}

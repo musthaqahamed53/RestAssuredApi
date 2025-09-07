@@ -62,5 +62,8 @@ public class Basics {
         String actuAddress = js2.get("address");
         Assert.assertEquals(actuAddress, newAddress);
 
+        String rrr = new String(Files.readAllBytes(Path.of(System.getProperty("user.dir") + "//src//test//java//files//AddPlace.json")));
+        System.out.println("rrr "+ rrr);
+
     }
 }
