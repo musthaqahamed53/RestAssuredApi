@@ -165,6 +165,7 @@ List<String> categories = js.getList("categories");
 String firstCategory = js.get("categories[0]");
 
 Schema Validation with Error Handling:
+InputStream schemaStream = getClass().getClassLoader().getResourceAsStream("schema.json");
 try {
     assertThat(jsonData, matchesJsonSchema(schemaStream));
     System.out.println("Validation passed");
@@ -179,6 +180,7 @@ student.getAddress().setCity("New City");
 String modifiedJson = mapper.writeValueAsString(student);
 
 REST Assured with Schema:
+InputStream schemaStream = getClass().getClassLoader().getResourceAsStream("schema.json");
 given()
     .when().get("/api/users")
     .then()
@@ -205,6 +207,13 @@ given()
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
     <version>2.19.1</version>
+</dependency>
+
+<dependency>
+    <groupId>org.hamcrest</groupId>
+    <artifactId>hamcrest</artifactId>
+    <version>2.2</version>
+    <scope>test</scope>
 </dependency>
 
 9. IMPORT STATEMENTS
