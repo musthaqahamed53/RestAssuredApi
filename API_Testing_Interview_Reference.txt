@@ -179,6 +179,15 @@ student.setName("Updated Name");
 student.getAddress().setCity("New City");
 String modifiedJson = mapper.writeValueAsString(student);
 
+Mixed Array and List Modification:
+pojo_sheik[] pojoArray = mapper.readValue(json, pojo_sheik[].class);
+List<pojo_sheik> places = Arrays.asList(pojoArray);
+// Mix array and list access
+pojo_sheik firstPlace = pojoArray[0];           // Array access
+pojo_sheik secondPlace = places.get(1);         // List access
+firstPlace.getPlace().setName("Updated First");
+secondPlace.getPlace().setName("Updated Second");
+
 REST Assured with Schema:
 InputStream schemaStream = getClass().getClassLoader().getResourceAsStream("schema.json");
 given()

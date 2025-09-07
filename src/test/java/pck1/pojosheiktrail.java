@@ -23,6 +23,8 @@ public class pojosheiktrail {
 
         // 🔧 MODIFY DATA HERE
         pojo_sheik firstPlace = pojoSheikArray[0];
+        pojo_sheik secondPlace = places.get(1);
+        secondPlace.getPlace().setName("Updated Second name");
         firstPlace.getPlace().setName("UPDATED PLACE NAME");
         firstPlace.getPlace().getContact().setEmail("newemail@test.com");
         firstPlace.getMeta().setVerified(false);
